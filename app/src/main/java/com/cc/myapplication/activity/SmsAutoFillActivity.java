@@ -1,4 +1,4 @@
-package com.cc.myapplication;
+package com.cc.myapplication.activity;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -11,7 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cc.myapplication.utils.T;
+import com.cc.myapplication.R;
+import com.cc.myapplication.utils.ToastUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -66,25 +67,25 @@ public class SmsAutoFillActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btn_getcode:
                 if (TextUtils.isEmpty(etPhone.getText().toString().trim())) {
-                    T.showToastShort(SmsAutoFillActivity.this, "亲！手机号不能为空噢");
+                    ToastUtil.showToastShort(SmsAutoFillActivity.this, "亲！手机号不能为空噢");
                     return;
                 }
                 myCount.start();
-                T.showToastShort(SmsAutoFillActivity.this, "验证码正在快马加鞭赶过来....");
+                ToastUtil.showToastShort(SmsAutoFillActivity.this, "验证码正在快马加鞭赶过来....");
                 BmobSMS.requestSMSCode(SmsAutoFillActivity.this, etPhone.getText().toString(), "模板1", new RequestSMSCodeListener() {
 
                     @Override
                     public void done(Integer smsId, BmobException ex) {
                         if (ex == null) {//验证码发送成功
                             Log.i("bmob", "短信id：" + smsId);//用于查询本次短信发送详情
-                            T.showToastShort(SmsAutoFillActivity.this, "发送成功，短信id" + smsId);
+                            ToastUtil.showToastShort(SmsAutoFillActivity.this, "发送成功，短信id" + smsId);
                         }
                     }
                 });
                 break;
             case R.id.btn_bind:
                 if (TextUtils.isEmpty(etCode.getText().toString().trim())) {
-                    T.showToastShort(SmsAutoFillActivity.this, "亲！未输入验证码");
+                    ToastUtil.showToastShort(SmsAutoFillActivity.this, "亲！未输入验证码");
                     return;
                 }
                 BmobSMS.verifySmsCode(SmsAutoFillActivity.this, etPhone.getText().toString(), etCode.getText().toString(), new VerifySMSCodeListener() {
@@ -92,9 +93,9 @@ public class SmsAutoFillActivity extends AppCompatActivity {
                     @Override
                     public void done(BmobException ex) {
                         if (ex == null) {//短信验证码已验证成功
-                            T.showToastShort(SmsAutoFillActivity.this, "绑定成功");
+                            ToastUtil.showToastShort(SmsAutoFillActivity.this, "绑定成功");
                         } else {
-                            T.showToastShort(SmsAutoFillActivity.this, "验证码错误");
+                            ToastUtil.showToastShort(SmsAutoFillActivity.this, "验证码错误");
                         }
                     }
                 });

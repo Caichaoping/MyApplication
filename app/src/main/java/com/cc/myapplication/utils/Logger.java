@@ -11,11 +11,11 @@ import com.cc.myapplication.BuildConfig;
 /**
  * Wrapper API for sending log output.
  */
-public class L {
+public class Logger {
 
     protected static final String TAG = "CCP";
 
-    private L() {
+    private Logger() {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 

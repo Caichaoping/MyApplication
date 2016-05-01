@@ -16,7 +16,7 @@ import com.cc.myapplication.R;
  * 邮箱：971859818@qq.com
  */
 
-public class T {
+public class ToastUtil {
 
     private static Toast toast;
 
